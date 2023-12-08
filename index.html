@@ -13,7 +13,7 @@
         <el-row :gutter="20">
             <el-col :span="2">&nbsp;</el-col>
             <el-col :span="20" style="text-align: center;">
-                <el-row style="margin-bottom: 10px; font-size: 36px; color: gray;">
+                <el-row style="margin-bottom: 10px; font-size: 36px; color: rgb(128,128,128);">
                     <el-col :span="24">
                         个人图床
                     </el-col>
@@ -34,6 +34,34 @@
             </el-col>
             <el-col :span="2">&nbsp;</el-col>
         </el-row>
+        <el-row :gutter="20">
+            <el-col :span="2">&nbsp;</el-col>
+            <el-col :span="20">
+                <template v-for="data in imgList">
+                    <el-row style="margin-bottom: 10px; text-align: center;">
+                        <el-row style="margin-bottom: 10px">
+                            <el-link :underline="false" :href="data.articleUrl" type="primary" style="font-size: large" target="_blank">{{data.name}}</el-link>
+                        </el-row>
+                        <template v-for="file in data.files">
+                        <el-row style="margin-bottom: 5px;">
+                            <el-card shadow="hover">
+                                <el-row style="margin-bottom: 5px;">
+                                    {{file.fileName}}
+                                </el-row>
+                                <el-row>
+                                    <el-image style="height: 200px; margin-left: 10px;" :src="file.url" lazy></el-image>
+                                </el-row>
+                                <el-row>
+                                    <el-button type="text" @click="copyToClipboard(file)">复制链接</el-button>
+                                </el-row>
+                            </el-card>
+                        </el-row>
+                    </template>
+                    </el-row>
+                </template>
+            </el-col>
+            <el-col :span="2">&nbsp;</el-col>
+        </el-row>
     </div>
 </body>
 <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
@@ -42,10 +70,65 @@
     new Vue({
       el: '#app',
       data: function() {
-        return { 
-
+        return {
+            imgList: []
         }
-      }
+      },
+      mounted () {
+          this.init()
+      },
+        methods: {
+          copyToClipboard: function (file) {
+              // 要复制的文本
+            var textToCopy = file.url; // 替换为你的字符串
+
+            // 创建一个临时文本区域元素
+            var tempTextArea = document.createElement("textarea");
+            tempTextArea.value = textToCopy;
+
+            // 将文本区域元素添加到文档中
+            document.body.appendChild(tempTextArea);
+
+            // 选择文本
+            tempTextArea.select();
+
+            try {
+                // 使用 Clipboard API 复制选定的文本
+                document.execCommand('copy');
+                console.log('Text copied to clipboard!');
+            } catch (err) {
+                console.error('Unable to copy text to clipboard.', err);
+            }
+
+            // 移除临时文本区域元素
+            document.body.removeChild(tempTextArea);
+
+            this.$notify({
+              title: '复制成功',
+              type: 'success',
+              message: '成功复制文件链接：' + file.fileName,
+              duration: 1000
+            });
+          },
+          init : function() {
+             fetch('tree.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(jsonData => {
+            // JSON 文件已加载成功
+            console.log(jsonData);
+            this.imgList = jsonData
+            // 在这里可以使用 jsonData 对象进行操作
+        })
+        .catch(error => {
+            console.error('Error during fetch:', error);
+        });
+          }
+        }
     })
   </script>
 </html>
