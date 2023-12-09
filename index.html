@@ -52,6 +52,9 @@
                                     <el-image style="height: 200px; margin-left: 10px;" :src="file.url" lazy></el-image>
                                 </el-row>
                                 <el-row>
+                                    {{file.url}}
+                                </el-row>
+                                <el-row>
                                     <el-button type="text" @click="copyToClipboard(file)">复制链接</el-button>
                                 </el-row>
                             </el-card>
