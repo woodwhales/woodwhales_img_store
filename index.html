@@ -41,7 +41,7 @@
                             <el-menu @select="handleMenuSelect"
                                      :default-active="defaultActive">
                                 <template v-for="(img, index) in imgList">
-                                    <el-menu-item :index="index" >
+                                    <el-menu-item :index="index+''" >
                                         <span slot="title">{{img.name}}</span>
                                     </el-menu-item>
                                 </template>
@@ -85,7 +85,7 @@
       el: '#app',
       data: function() {
         return {
-          defaultActive: 0,
+          defaultActive: '0',
           imgList: [],
           selectedImg: {
               articleUrl: '',
@@ -149,7 +149,7 @@
           .then(jsonData => {
             // JSON 文件已加载成功
             this.imgList = jsonData
-            this.defaultActive = 0
+            this.defaultActive = '0'
             this.selectedImg = this.imgList[this.defaultActive]
           })
           .catch(error => {
