@@ -12,12 +12,15 @@
     .el-aside::-webkit-scrollbar {
         display: none;
     }
+    .el-aside {
+        height: calc(100vh - 200px)
+    }
 </style>
 
 <body>
     <div id="app">
             <el-container>
-                <el-header style="text-align: center; height: auto">
+                <el-header style="text-align: center; height: auto;">
                     <el-row style="margin-bottom: 10px; font-size: 28px;">
                         <el-row>
                             <el-link href="https://image.woodwhales.cn" style="font-size: 28px" :underline="false">woodwhaes-image-store</el-link>
@@ -148,7 +151,7 @@
           })
           .then(jsonData => {
             // JSON 文件已加载成功
-            this.imgList = jsonData
+            this.imgList = jsonData.reverse()
             this.defaultActive = '0'
             this.selectedImg = this.imgList[this.defaultActive]
           })
