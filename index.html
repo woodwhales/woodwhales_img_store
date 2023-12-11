@@ -9,35 +9,40 @@
 </head>
 
 <style type="text/css">
+    body {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
     .el-aside::-webkit-scrollbar {
         display: none;
     }
     .el-aside {
-        height: calc(100vh - 200px)
+        height: calc(100vh - 100px)
+    }
+    .el-main {
+        height: calc(100vh - 100px)
     }
 </style>
 
 <body>
     <div id="app">
             <el-container>
-                <el-header style="text-align: center; height: auto;">
-                    <el-row style="margin-bottom: 10px; font-size: 28px;">
+                <el-header style="text-align: center; height: auto; background: #FFF; position: fixed; width: 100%; z-index: 1000; box-shadow: 0 0 10px 10px rgb(250, 248, 248);">
+                    <el-row style="margin-bottom: 10px; font-size: 18px;">
                         <el-row>
-                            <el-link href="https://image.woodwhales.cn" style="font-size: 28px" :underline="false">woodwhaes-image-store</el-link>
+                            <el-link href="https://image.woodwhales.cn" style="font-size: 18px" :underline="false">woodwhaes-image-store</el-link>
                         </el-row>
                     </el-row>
-                    <el-row style="margin-bottom: 10px; font-size: 14px; color: rgb(128,128,128);">
+                    <el-row style="margin-bottom: 10px; font-size: 12px; color: rgb(128,128,128);">
                         生命不息，折腾不止
                     </el-row>
-                    <el-row style="margin-bottom: 10px;">
+                    <el-row style="margin-bottom: 10px; font-size: 10px;">
                         <el-link type="success" href="https://woodwhales.cn" target="_blank" :underline="false">woodwhales'blog</el-link>
-                    </el-row>
-                    <el-row>
-                        <el-divider><i class="el-icon-cherry"></i></el-divider>
                     </el-row>
                 </el-header>
 
-                <el-container>
+                <el-container style="margin-top: 100px;">
                     <el-aside width="120px">
                         <el-row>
                             <el-col :span="24">
@@ -59,12 +64,12 @@
                             </el-row>
                             <template v-for="file in selectedImg.files">
                                 <el-row style="margin-bottom: 5px;">
-                                    <el-card shadow="hover">
+                                    <el-card shadow="always">
                                         <el-row style="margin-bottom: 5px;">
                                             {{file.fileName}}
                                         </el-row>
-                                        <el-row>
-                                            <el-image style="height: 200px; margin-left: 10px;" :src="file.url" lazy></el-image>
+                                        <el-row v-if="checkImage(file.url)">
+                                            <el-image style="height: 200px; margin-left: 10px;" fit="cover" :src="file.url" lazy></el-image>
                                         </el-row>
                                         <el-row>
                                             {{file.url}}
@@ -88,6 +93,7 @@
       el: '#app',
       data: function() {
         return {
+          imageScale: 1,
           defaultActive: '0',
           imgList: [],
           selectedImg: {
@@ -109,6 +115,16 @@
       methods: {
         handleMenuSelect(index) {
           this.selectedImg = this.imgList[index]
+        },
+        computeStyle() {
+            return  "{ transform: 'scale('" + this.imageScale + "')' }"
+        },
+        checkImage: function (fileUrl) {
+            var urlWithoutQuery = fileUrl.split('?')[0]
+            var extension = urlWithoutQuery.split('.').pop().toLowerCase()
+            const res = ['png', 'jpg', 'jpeg', 'bmp', 'gif', 'webp', 'psd', 'svg', 'tiff'].indexOf(extension) !== -1;
+            console.log('fileUrl', fileUrl, res)
+            return res;
         },
         copyToClipboard: function (file) {
             // 要复制的文本
