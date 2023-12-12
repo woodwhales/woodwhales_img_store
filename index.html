@@ -66,10 +66,7 @@
                                 <el-row style="margin-bottom: 5px;">
                                     <el-card shadow="always">
                                         <el-row style="margin-bottom: 5px;">
-                                            {{file.fileName}}
-                                        </el-row>
-                                        <el-row v-if="checkImage(file.url)">
-                                            <el-image style="height: 200px; margin-left: 10px;" fit="cover" :src="file.url" lazy></el-image>
+                                            <span>{{file.fileName}}</span>
                                         </el-row>
                                         <el-row>
                                             {{file.url}}
@@ -77,6 +74,10 @@
                                         <el-row>
                                             <el-button type="text" @click="copyToClipboard(file)">复制链接</el-button>
                                         </el-row>
+                                        <el-row v-if="checkImage(file.url)">
+                                            <el-image style="height: 200px; margin-left: 10px;" fit="cover" :src="file.url" lazy></el-image>
+                                        </el-row>
+
                                     </el-card>
                                 </el-row>
                             </template>
