@@ -3182,6 +3182,18 @@
 			{
 				"fileName":"15.png",
 				"url":"https://image.woodwhales.cn/065/images/15.png"
+			},
+			{
+				"fileName":"commons-daemon-1.2.2-bin-windows.zip",
+				"url":"https://image.woodwhales.cn/065/images/commons-daemon-1.2.2-bin-windows.zip"
+			},
+			{
+				"fileName":"zktools.zip",
+				"url":"https://image.woodwhales.cn/065/images/zktools.zip"
+			},
+			{
+				"fileName":"ZooInspector.zip",
+				"url":"https://image.woodwhales.cn/065/images/ZooInspector.zip"
 			}
 		],
 		"name":"065"
