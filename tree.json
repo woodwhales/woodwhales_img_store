@@ -4996,5 +4996,20 @@
 			}
 		],
 		"name":"098"
+	},
+	{
+		"articleUrl":"https://woodwhales.cn/",
+		"basePath":"099",
+		"files":[
+			{
+				"fileName":"face.png",
+				"url":"https://image.woodwhales.cn/099/face.png"
+			},
+			{
+				"fileName":"01.png",
+				"url":"https://image.woodwhales.cn/099/images/01.png"
+			}
+		],
+		"name":"099"
 	}
 ]
