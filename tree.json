@@ -5015,5 +5015,20 @@
 			}
 		],
 		"name":"099"
+	},
+	{
+		"articleUrl":"https://woodwhales.cn/",
+		"basePath":"woodwhales-music",
+		"files":[
+			{
+				"fileName":"admin-index.png",
+				"url":"https://image.woodwhales.cn/woodwhales-music/admin-index.png"
+			},
+			{
+				"fileName":"index.png",
+				"url":"https://image.woodwhales.cn/woodwhales-music/index.png"
+			}
+		],
+		"name":"woodwhales-music"
 	}
 ]
